@@ -5,7 +5,7 @@ import styles from "./Cards.module.css";
 import { EndGameModal } from "../../components/EndGameModal/EndGameModal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
-
+import { useCount } from "../hooks/useCount";
 // Игра закончилась
 const STATUS_LOST = "STATUS_LOST";
 const STATUS_WON = "STATUS_WON";
@@ -34,16 +34,19 @@ function getTimerValue(startDate, endDate) {
     seconds,
   };
 }
-
 /**
  * Основной компонент игры, внутри него находится вся игровая механика и логика.
  * pairsCount - сколько пар будет в игре
  * previewSeconds - сколько секунд пользователь будет видеть все карты открытыми до начала игры
  */
-export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
+export function Cards({ pairsCount = 3, previewSeconds = 5, lostCount, getLost }) {
+  // console.log(count, getCount);
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
+  const [prevCard, setPrevCard] = useState(null);
+  const [count, setCount] = useState(false);
   // Текущий статус игры
+  const { lite } = useCount();
   const [status, setStatus] = useState(STATUS_PREVIEW);
 
   // Дата начала игры
@@ -60,6 +63,8 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
   function finishGame(status = STATUS_LOST) {
     setGameEndDate(new Date());
     setStatus(status);
+    setCount(false);
+    getLost(0);
   }
   function startGame() {
     const startDate = new Date();
@@ -83,6 +88,18 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
    * - "Игра продолжается", если не случилось первых двух условий
    */
   const openCard = clickedCard => {
+    setCount(!count);
+    if (lite) {
+      if (count) {
+        if (prevCard?.suit !== clickedCard.suit || prevCard?.rank !== clickedCard.rank) {
+          getLost(++lostCount);
+        }
+      }
+      if (lostCount === 3) {
+        finishGame(STATUS_LOST);
+      }
+    }
+    setPrevCard(clickedCard);
     // Если карта уже открыта, то ничего не делаем
     if (clickedCard.open) {
       return;
@@ -105,8 +122,15 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
 
     // Победа - все карты на поле открыты
     if (isPlayerWon) {
-      finishGame(STATUS_WON);
-      return;
+      if (lite) {
+        if (lostCount < 3) {
+          finishGame(STATUS_WON);
+          return;
+        }
+      } else {
+        finishGame(STATUS_WON);
+        return;
+      }
     }
 
     // Открытые карты на игровом поле
@@ -127,8 +151,13 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
 
     // "Игрок проиграл", т.к на поле есть две открытые карты без пары
     if (playerLost) {
-      finishGame(STATUS_LOST);
-      return;
+      setTimeout(() => {
+        setCards(cards.map(card => (openCardsWithoutPair.includes(card) ? { ...card, open: false } : card)));
+      }, 1000);
+      if (!lite) {
+        finishGame(STATUS_LOST);
+        return;
+      }
     }
 
     // ... игра продолжается
@@ -209,6 +238,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
           />
         ))}
       </div>
+      {lite ? <p className={styles.count}>Осталось {3 - lostCount} попыток</p> : ""}
 
       {isGameEnded ? (
         <div className={styles.modalContainer}>
