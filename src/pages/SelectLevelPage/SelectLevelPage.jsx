@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import styles from "./SelectLevelPage.module.css";
-
+import { useCount } from "../../components/hooks/useCount";
 export function SelectLevelPage() {
+  const { lite, getLite } = useCount();
+  console.log(lite);
+  function changeInputValue() {
+    getLite(!lite);
+  }
   return (
     <div className={styles.container}>
       <div className={styles.modal}>
@@ -23,6 +28,15 @@ export function SelectLevelPage() {
             </Link>
           </li>
         </ul>
+        <div>
+          <p className={styles.easy}>Легкий режим</p>
+          <div className="checkbox">
+            <label>
+              <input className={styles.check} type="checkbox" checked={lite} onChange={changeInputValue}></input>
+              <span className={styles.customCheckbox}></span>
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   );
