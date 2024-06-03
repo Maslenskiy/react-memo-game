@@ -5,7 +5,7 @@ import heartsImageUrl from "./images/hearts.svg";
 import crossImageUrl from "./images/cross.svg";
 import spadesImageUrl from "./images/spades.svg";
 import diamondsImageUrl from "./images/diamonds.svg";
-import cardShirtImageUrl from "./images/Card-shirt.svg";
+import cardShirtImageUrl from "../Card/images/Card-shirt.svg";
 import cn from "classnames";
 
 const images = {
