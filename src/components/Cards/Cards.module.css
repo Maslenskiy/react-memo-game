@@ -78,3 +78,8 @@
   font-family: StratosSkyeng;
 }
 
+.show {
+  color: white; 
+  font-size: 24px;
+  margin-bottom: 30px;
+}
