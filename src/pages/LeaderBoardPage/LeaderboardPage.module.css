@@ -1,0 +1,180 @@
+.container {
+  /* width: 686px; */
+  width: 944px;
+  margin: 50px auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 133%;
+  color: #fff;
+  padding: 8px;
+}
+
+.time {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  font-family: StratosSkyeng;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.headerh4 {
+  font-family: StratosSkyeng;
+  color: #ffffff;
+}
+
+.leaderboard_unit {
+  /* width: 686px; */
+  width: 944px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 48px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.leaderboard_ttl {
+  font-family: StratosSkyeng;
+  color: #999999;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.leaderboard_text {
+  font-family: StratosSkyeng;
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.leaderboard_achievements {
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  
+}
+.leaderboard_achievements_item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.modal {
+  width: 480px;
+  height: 459px;
+  border-radius: 12px;
+  background: #c2f5ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.block_achievements {
+  position: relative;
+}
+
+.puzzle {
+  background-image: url(./images/puzzle.svg);
+}
+
+.puzzleGray {
+  background-image: url(./images/puzzleGray.svg);
+}
+
+.vision {
+  background-image: url(./images/vision.svg);
+}
+
+.visionGray {
+  background-image: url(./images/visionGray.svg);
+}
+
+.puzzle, .puzzleGray, .vision, .visionGray {
+  height: 32px;
+  width: 32px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  cursor: default;
+  z-index: 0;
+}
+
+.leaderboard_achievements {
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.leaderboard_achievements_item {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.leaderboard_achievements_item:hover::after {
+  content: attr(title);
+  background-color: #c2f5ff;
+  background-image: url(./images/diffBubble.svg);
+  color: #004980;
+  border-radius: 4px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Position the tooltip above the element */
+  margin-left: 74px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  width: 154px;
+  height: auto;
+  font-family: "StratosSkyeng", sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+.leaderboard_achievements_item:hover::after {
+  opacity: 1;
+}
+
+[title]::before {
+  opacity: 0;
+  content: attr(button);
+  padding-top: 25px;
+  position: absolute;
+  color: #004980;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  z-index: 2;
+  left: -7px;
+  bottom: -50px;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}

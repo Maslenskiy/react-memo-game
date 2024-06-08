@@ -14,7 +14,7 @@ export const LeaderProvider = ({ children }) => {
     setUser(user);
   };
   useEffect(() => {
-    fetch("https://wedev-api.sky.pro/api/leaderboard")
+    fetch("https://wedev-api.sky.pro/api/v2/leaderboard")
       .then(response => response.json())
       .then(data => setleaderBoard(data.leaders));
   }, []);

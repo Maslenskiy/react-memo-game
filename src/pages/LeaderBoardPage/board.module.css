@@ -49,10 +49,11 @@
   color: gray;
   font-family: StratosSkyeng;
   border-radius: 10px;
-  display: flex;
+  display: grid;
   justify-content: space-between;
   padding: 10px;
   margin-bottom: 10px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .trBody {
@@ -70,4 +71,13 @@ table {
   border: none; 
   outline: none;
   padding: 5px;
+}
+
+.img {
+  width: 20px;
+  height: 20px;
+}
+
+.trImgs {
+  width: 100px;
 }
