@@ -3,15 +3,24 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
-import { CountProvider } from "./contexts/count";
-import { LeaderProvider } from "./contexts/leaders";
+import { ModeProvider } from "./context/ModeContext";
+import { AchievementsProvider } from "./context/AchievementContext";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <CountProvider>
-      <LeaderProvider>
+    <AchievementsProvider>
+      <ModeProvider>
         <RouterProvider router={router}></RouterProvider>
-      </LeaderProvider>
-    </CountProvider>
+      </ModeProvider>
+    </AchievementsProvider>
   </React.StrictMode>,
 );
+// const root = ReactDOM.createRoot(document.getElementById("root"));
+// root.render(
+//   <React.StrictMode>
+//     <ModeProvider>
+//       <RouterProvider router={router}></RouterProvider>
+//     </ModeProvider>
+//   </React.StrictMode>,
+// );
