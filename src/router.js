@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { GamePage } from "./pages/GamePage/GamePage";
 import { SelectLevelPage } from "./pages/SelectLevelPage/SelectLevelPage";
-import { LeaderboardPage } from "../src/pages/LeaderBoardPage/LeaderboardPage";
+import { LeaderboardPage } from "../src/pages/LeaderBoardPage/LeaderBoardPages";
 
 export const router = createBrowserRouter(
   [
